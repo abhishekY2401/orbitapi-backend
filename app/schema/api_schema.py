@@ -23,6 +23,7 @@ class ApiSpecModel(BaseModel):
     expected_response: ResponseDataModel
     auth_required: bool = False
     db_state: Optional[str] = ''
+    test_cases: str
 
 
 class ApiSpecsResponseModel(BaseModel):

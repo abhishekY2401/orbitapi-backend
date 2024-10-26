@@ -356,7 +356,7 @@ def extract_view_methods_and_patterns(file_path, project_root):
             view_methods[view_name] = {
                 "methods": methods,
                 "controller_signature": controller_signature,
-                "controller_code": controller_code,  # Full function code
+                "controller_code": controller_code,
                 "request_data": request_data,
                 "expected_response": responses if responses else [expected_response]
             }
