@@ -1,35 +1,25 @@
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
-class RequestDataModel(BaseModel):
-    body: Dict[str, Any] = {}
-    params: Dict[str, Any] = {}
-    headers: Dict[str, Any] = {}
-    query: Dict[str, Any] = {}
-
-
-class ResponseDataModel(BaseModel):
-    status_code: int
-    body: Dict[str, Any] = {}
-
-
-class ApiSpecModel(BaseModel):
+class APISpecification(BaseModel):
     endpoint: str
     method: str
     controller_signature: str
     controller_code: str
-    request_data: RequestDataModel
-    expected_response: ResponseDataModel
+    request_data: Dict[str, Any]
+    expected_response: List[Dict[str, Any]]
     auth_required: bool = False
-    db_state: Optional[str] = ''
     test_cases: str
-
-
-class ApiSpecsResponseModel(BaseModel):
-    api_specs: List[ApiSpecModel]
+    files: str
+    api_schema: Dict[str, Any] = Field(default_factory=dict)
+    middleware: List[str]
 
 
 class ParseRequestModel(BaseModel):
     repo_url: str
     framework_type: str
+
+
+class ApiSpecsResponseModel(BaseModel):
+    api_specs: List[APISpecification]
